@@ -50,7 +50,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('brand.index') }}" class="nav-link">
+                    <a href="{{ route('size.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-bars"></i>
                         <p>
                             Size
@@ -107,7 +107,7 @@
                     </a>
                 </li>
                 <li class="nav-item menu-close">
-                    <a href="#" class="nav-link active">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-cogs"></i>
                         <p>
                             Settings

@@ -14,7 +14,8 @@ class SizeController extends Controller
      */
     public function index()
     {
-        //
+        $sizes = Size::orderby('status')->get();
+        return view('dashboard.size.index',compact('sizes'));
     }
 
     /**
@@ -24,7 +25,7 @@ class SizeController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.size.create');
     }
 
     /**
@@ -35,7 +36,14 @@ class SizeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required|min:1|max:20|unique:sizes'
+        ]);
+        $size = new Size;
+        $size->name = $request->name;
+        $size->save();
+        flash($size->name .' Size Saved Successfully')->success();
+        return back();
     }
 
     /**
@@ -55,9 +63,10 @@ class SizeController extends Controller
      * @param  \App\Models\Size  $size
      * @return \Illuminate\Http\Response
      */
-    public function edit(Size $size)
+    public function edit($id)
     {
-        //
+        $size = Size::findOrFail($id);
+        return view('dashboard.size.edit',compact('size'));
     }
 
     /**
@@ -67,9 +76,16 @@ class SizeController extends Controller
      * @param  \App\Models\Size  $size
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Size $size)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required|min:1|max:20|unique:sizes,name,' .$id
+        ]);
+        $size = Size::findOrFail($id);
+        $size->name = $request->name;
+        $size->save();
+        flash($size->name .' Size Updated Successfully')->success();
+        return redirect()->route('size.index');
     }
 
     /**
@@ -78,8 +94,13 @@ class SizeController extends Controller
      * @param  \App\Models\Size  $size
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Size $size)
+    public function destroy($id)
     {
-        //
+        $size = Size::find($id);
+        $size_name = $size->name;
+        $size->delete();
+        return response()->json([
+            'success' => $size_name.' has been successfully deleted'
+        ]);
     }
 }

@@ -111,13 +111,8 @@
                                 location.reload();
                             }
                         })
-
-
-                        // swal("Your file has been deleted!", {
-                        //     icon: "success",
-                        // });
                     } else {
-                        swal("Your imaginary file is safe!");
+                        swal("Your file is safe!");
                     }
                 });
         })

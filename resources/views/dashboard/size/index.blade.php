@@ -1,17 +1,17 @@
 @extends('layouts.master')
-@section('title', 'Create Categories')
+@section('title', 'Create Size')
 
 @section('content')
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ __('Categories') }}</h1>
+                    <h1 class="m-0">{{ __('Size') }}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">{{ __('Home') }}</a></li>
-                        <li class="breadcrumb-item active">{{ __('Categories') }}</li>
+                        <li class="breadcrumb-item active">{{ __('Size') }}</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -23,8 +23,8 @@
         <!-- general form elements -->
         <div class="card card-primary card-outline">
             <div class="card-header">
-                <h3 class="card-title">{{ __('Categories Table') }}</h3>
-                <a href="{{ route('categories.create') }}" class="float-right btn btn-sm bg-gradient-primary"><i
+                <h3 class="card-title">{{ __('Size Table') }}</h3>
+                <a href="{{ route('size.create') }}" class="float-right btn btn-sm bg-gradient-primary"><i
                         class="fas fa-plus"></i>&nbsp;{{ __('Add New') }}</a>
             </div>
             <!-- /.card-header -->
@@ -41,13 +41,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $category)
+                        @foreach ($sizes as $size)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $category->name }}</td>
-                                <td>{{ $category->created_at }}</td>
+                                <td>{{ $size->name }}</td>
+                                <td>{{ $size->created_at }}</td>
                                 <td>
-                                    @if ($category->status == 1)
+                                    @if ($size->status == 1)
                                         <span class="badge bg-gradient-warning">Active</span>
                                     @else
                                         <span class="badge bg-gradient-danger">Inactive</span>
@@ -55,14 +55,14 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('categories.edit', $category->id) }}"
+                                    <a href="{{ route('size.edit', $size->id) }}"
                                         class="btn btn-sm bg-gradient-primary"><i
                                             class="far fa-edit"></i>&nbsp;{{ __('Edit') }}</a>
-                                    <a href="" data-form-id="category-delete-{{ $category->id }}"
+                                    <a href="" data-form-id="{{ $size->id }}"
                                         class="btn btn-sm bg-gradient-danger delete"><i
                                             class="far fa-trash-alt"></i>&nbsp;{{ __('Delete') }}</a>
-                                    <form id="category-delete-{{ $category->id }}"
-                                        action="{{ route('categories.destroy', $category->id) }}">
+                                    <form id="{{ $size->id }}"
+                                        action="{{ route('size.destroy', $size->id) }}">
                                         @csrf
                                         @method('DELETE')
                                     </form>
@@ -94,7 +94,7 @@
             e.preventDefault();
             let form_id = $(this).data('form-id');
             swal({
-                    title: form_id+"Are you sure?",
+                    title: "Are you sure?",
                     text: "Once deleted, you will not be able to recover this imaginary file!",
                     icon: "warning",
                     buttons: true,
@@ -102,12 +102,24 @@
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        $('#'+form_id).submit();
-                        // swal("Your file has been deleted!", {
-                        //     icon: "success",
-                        // });
+                        var id = form_id;
+                        $.ajax({
+                            type:'DELETE',
+                            url:'size/' +id,
+                            beforeSend: function(request) {
+                                return request.setRequestHeader('X-CSRF-Token', $(
+                                    "meta[name='csrf-token']").attr('content'));
+                            },
+                            success:function(response){
+                                swal(response.success, {
+                                    icon: "success",
+                                });
+                                location.reload();
+                            }
+                        })
+
                     } else {
-                        swal("Your imaginary file is safe!");
+                        swal("Your file is safe!");
                     }
                 });
         })

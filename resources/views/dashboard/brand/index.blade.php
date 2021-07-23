@@ -89,7 +89,7 @@
             e.preventDefault();
             let form_id = $(this).data('form-id');
             swal({
-                    title: form_id+ "Are you sure?",
+                    title:"Are you sure?",
                     text: "Once deleted, you will not be able to recover this imaginary file!",
                     icon: "warning",
                     buttons: true,
@@ -113,7 +113,7 @@
                             }
                         })
                     } else {
-                        swal("Your imaginary file is safe!");
+                        swal("Your file is safe!");
                     }
                 });
         })

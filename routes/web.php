@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SizeController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -36,5 +37,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Brand
     Route::resource('brand',BrandController::class);
     Route::delete('brand/{id}',[BrandController::class,'destroy']);
+
+    // Size
+    Route::resource('size',SizeController::class);
+    Route::delete('size/{id}',[SizeController::class,'destroy']);
 });
 
