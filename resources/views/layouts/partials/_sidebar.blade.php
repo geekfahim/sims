@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('category.index') }}" class="nav-link">
+                    <a href="{{ route('product.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-dice-d6"></i>
                         <p>
                             Product
@@ -102,6 +102,15 @@
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Users
+                            <span class="right badge badge-danger">New</span>
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('activity') }}" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Activity
                             <span class="right badge badge-danger">New</span>
                         </p>
                     </a>

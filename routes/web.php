@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SizeController;
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +36,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Category
     Route::resource('category',CategoryController::class);
     Route::delete('category/{id}',[CategoryController::class,'destroy']);
+    Route::get('api/categories', [CategoryController::class,'getCategoriesJSON']);
 
     // Brand
     Route::resource('brand',BrandController::class);
@@ -41,5 +45,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Size
     Route::resource('size',SizeController::class);
     Route::delete('size/{id}',[SizeController::class,'destroy']);
+    //Products
+    Route::resource('product',ProductController::class);
 });
 
+
+Route::get('/activity',[ActivityController::class,'getActivity'])->name('activity');

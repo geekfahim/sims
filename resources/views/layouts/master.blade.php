@@ -14,12 +14,11 @@
   @include('layouts.partials._sidebar')
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" id="app">
     <!-- Content Header (Page header) -->
     @include('flash::message')
     @yield('content')
     <!-- /.content-header -->
-
 
   </div>
   <!-- /.content-wrapper -->

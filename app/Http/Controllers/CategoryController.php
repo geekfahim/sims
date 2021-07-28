@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
@@ -43,6 +43,7 @@ class CategoryController extends Controller
         ]);
         $categories = new Category();
         $categories->name =$request->name;
+        $categories->created_by = auth()->id();
         $categories->save();
         flash($categories->name .' Category Saved Successfully')->success();
         return back();
@@ -106,4 +107,15 @@ class CategoryController extends Controller
         ]);
         // return redirect()->route('category.index');
     }
+
+
+    // public function getCategoriesJSON(){
+    //     $categories = Category::all();
+    //     return response()->JSON([
+    //         'success' => 'true',
+    //         'data'  =>$categories
+    //     ],Response::HTTP_OK);
+    // }
+
+
 }
