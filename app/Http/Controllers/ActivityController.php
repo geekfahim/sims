@@ -12,6 +12,7 @@ class ActivityController extends Controller
     {
         $activities = Activity::orderBy('created_at', 'DESC')
                      ->with('causer')->get();
+        // dd($activities);
         return view('dashboard.activity.index', compact('activities'));
     }
 }

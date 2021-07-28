@@ -10,7 +10,8 @@ class Category extends Model
 {
     use HasFactory,LogsActivity;
 
-    const name = "Category";
+     protected $log_name =  "Category";
+    // const name = "Category";
     protected $fillable = ['name', 'created_by','created_at','updated_at'];
     protected static $logAttributes = ['*'];
     protected static $logOnlyDirty = true;
@@ -18,8 +19,7 @@ class Category extends Model
 
     public function getDescriptionForEvent(string $eventName): string
     {
-        return $this::name." {$this->name} has been {$eventName}";
+        return  $this->log_name." {$this->name} has been {$eventName} ";
     }
 
-    // protected static $logAttributes = ['name', 'created_by','created_at','updated_at'];
 }
