@@ -1,14 +1,19 @@
 import Axios from 'axios'
 import * as actions from '../../action-types'
+import * as mutations from '../../mutation-types'
+
 
 export default {
     [actions.GET_CATEGORIES]({ commit }) {
+        // commit(mutations.SET_CATEGORIES, null)
         Axios.get('/api/categories')
             .then(res => {
-                console.log(res.data);
+                if (res.data.success == true) {
+                    commit(mutations.SET_CATEGORIES, res.data.data)
+                }
             })
             .catch (err  => {
-                console.log(err);
+                console.log(err.response);
         })
     }
 }
