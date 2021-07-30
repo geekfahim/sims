@@ -5080,7 +5080,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.use(vuex__WEBPACK_IMPORTED_MODULE_1__.d
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_1__.default.Store({
   modules: {
-    category: _modules_category__WEBPACK_IMPORTED_MODULE_2__.default
+    categories: _modules_category__WEBPACK_IMPORTED_MODULE_2__.default
   }
 }));
 
@@ -5108,6 +5108,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   var commit = _ref.commit;
   axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/categories').then(function (res) {
     console.log(res.data);
+  })["catch"](function (err) {
+    console.log(err);
   });
 }));
 
@@ -5143,7 +5145,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var state = {
-  category: {}
+  categories: {
+    name: 'fahim'
+  }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   state: state,

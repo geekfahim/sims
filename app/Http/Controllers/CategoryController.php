@@ -109,13 +109,13 @@ class CategoryController extends Controller
     }
 
 
-    // public function getCategoriesJSON(){
-    //     $categories = Category::all();
-    //     return response()->JSON([
-    //         'success' => 'true',
-    //         'data'  =>$categories
-    //     ],Response::HTTP_OK);
-    // }
+    public function getCategoriesJSON(){
+        $categories = Category::all();
+        return response()->JSON([
+            'success' => 'true',
+            'data'  =>$categories
+        ],Response::HTTP_OK);
+    }
 
 
 }
