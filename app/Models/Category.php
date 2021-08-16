@@ -17,7 +17,13 @@ class Category extends Model
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
 
-    public function getTextAttribute($key)
+    // casting
+    protected $casts=[
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
+    ];
+    // mutators
+    public function getTextAttribute()
     {
         return $this->name;
     }

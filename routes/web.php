@@ -41,10 +41,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Brand
     Route::resource('brand',BrandController::class);
     Route::delete('brand/{id}',[BrandController::class,'destroy']);
+    Route::get('api/brand', [BrandController::class,'getBrandJSON']);
+
 
     // Size
     Route::resource('size',SizeController::class);
     Route::delete('size/{id}',[SizeController::class,'destroy']);
+    Route::get('api/size', [SizeController::class,'getSizeJSON']);
+
     //Products
     Route::resource('product',ProductController::class);
 });

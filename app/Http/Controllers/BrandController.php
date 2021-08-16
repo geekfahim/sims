@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class BrandController extends Controller
 {
@@ -103,4 +104,15 @@ class BrandController extends Controller
             'success'=>$brands->name .'has been successfully deleted'
         ]);
     }
+    public function getBrandJSON(){
+        $brand = Brand::select('id','name')->get();
+        return response()->JSON([
+            'success' => true,
+            'data'  =>$brand
+        ],Response::HTTP_OK);
+    }
+
+
+
+
 }

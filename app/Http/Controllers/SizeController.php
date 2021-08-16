@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Size;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SizeController extends Controller
 {
@@ -103,4 +104,13 @@ class SizeController extends Controller
             'success' => $size_name.' has been successfully deleted'
         ]);
     }
+   public function getSizeJSON(){
+        $sizes = Size::all();
+        return response()->JSON([
+            'success' => true,
+            'data'  =>$sizes
+        ],Response::HTTP_OK);
+    }
+
+
 }
