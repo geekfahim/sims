@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
+use Illuminate\support\Str;
 
 class ProductController extends Controller
 {
@@ -15,7 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('dashboard.product.index',compact('products'));
+        return view('dashboard.product.index', compact('products'));
     }
 
     /**
@@ -36,7 +39,40 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'min:2', 'max:50', Rule::unique('products', 'name')],
+            'category_id' => ['required', 'numeric'],
+            'brand_id' => ['required', 'numeric'],
+            'sku' => ['required', 'string', 'min:2', 'max:100', Rule::unique('products', 'sku')],
+            'image' => ['nullable','mimes:jpeg,jpg,png','max:1024'],
+            'cost_price' => ['required','numeric'],
+            'retail_price' => ['required','numeric'],
+            'year' => ['required','numeric'],
+            'description' => ['required'],
+            'status' =>['required','numeric']
+        ]);
+
+        $products = new Product();
+        $products->name = $request->name;
+        $products->category_id = $request->category_id;
+        $products->brand_id = $request->brand_id;
+        $products->sku = $request->sku;
+        $products->cost_price = $request->cost_price;
+        $products->retail_price = $request->retail_price;
+        $products->year = $request->year;
+        $products->description = $request->description;
+        $products->status = $request->status;
+        $products->sku = $request->sku;
+        if($request->hasFile('image')){
+            $image = $request->image;
+            $name = Str::random(40).'.'.$image->getClientOriginalExtention();
+            $image->storeAs(public_path('/public/images/products'),$name);
+            $products->image = $name;
+        }
+
+        return response()->json([
+            'success' => ' has been successfully updated.',
+        ], Response::HTTP_OK);
     }
 
     /**

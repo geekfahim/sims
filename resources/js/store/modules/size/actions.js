@@ -6,8 +6,6 @@ import * as mutations from '../../mutation-types';
 export default {
     [actions.GET_SIZES]({commit}) {
         Axios.get('/api/size').then(res => {
-                console.log("action here...")
-                console.log(res.data)
                 if (res.data.success == true) {
                     commit(mutations.SET_SIZES, res.data.data)
                 }
